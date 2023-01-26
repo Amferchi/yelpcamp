@@ -1,3 +1,16 @@
+var express = require("express");
+var mongoose =require("mongoose");
+var app = express()
+var passport = require("passport");
+var localStrategy = require("passport-local")
+var passmonlocal = require("passport-local-mongoose");
+var campground = require("./models/campgrounds.js")
+var bodyparse = require("body-parser");
+var flash = require("connect-flash");
+var comments = require("./models/comments.js");
+var User = require("./models/user.js");
+var override = require("method-override");
+var middleware = require("./middleware/index.js");
 
   app.put("/campgrounds/:id/edit",middleware.checkCampOwner, function(req, res){
     campground.findByIdAndUpdate(req.params.id, req.body.body, function(err, campground){
