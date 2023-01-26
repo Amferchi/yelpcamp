@@ -12,6 +12,38 @@ var User = require("./models/user.js");
 var override = require("method-override");
 var middleware = require("./middleware/index.js");
 
+mongoose.connect("mongodb://localhost/yelpcamp")
+app.use(require("express-session")({
+ secret:"I love my mum",
+ resave: false,
+ saveUninitialized: false
+}));
+app.use(flash())
+app.use(bodyparse.urlencoded({extended:true}));
+app.use(passport.initialize());
+app.use(passport.session())
+app.use(override("_method"))
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+ app.use(express.static(__dirname + "/public"));
+ app.set("view engine" , "ejs")
+
+app.use(function(req , res , next){
+  res.locals.currentUser = req.user;
+  res.locals.error= req.flash("error");
+  res.locals.success= req.flash("success");
+  next();
+});
+
+//EDIT ROUTES
+ app.get("/campgrounds/:id/edit",middleware.checkCampOwner, function(req , res){
+   campground.findById(req.params.id , function(err, campground){
+     if(err){console.log(err)}
+     else{ res.render("editcamp" , {campground: campground})}
+   });
+ });
+
   app.put("/campgrounds/:id/edit",middleware.checkCampOwner, function(req, res){
     campground.findByIdAndUpdate(req.params.id, req.body.body, function(err, campground){
       if(err){
