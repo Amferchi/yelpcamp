@@ -181,7 +181,7 @@ app.post("/campgrounds/:id/comments",middleware.isLoggedin, function(req , res){
         return res.render("register")
         }
         passport.authenticate("local")(req , res , function(){
-        req.flash("success" , "Welcome to yelpcamp" + User.username)
+        req.flash("success" , "Welcome to yelpcamp" +   user.username)
            res.redirect("/campgrounds")
         })
       })
@@ -203,30 +203,6 @@ app.post("/campgrounds/:id/comments",middleware.isLoggedin, function(req , res){
   }), function(req,res){
   })
 
-  //middleware
-  function isLoggedin(req , res , next){
-     if(req.isAuthenticated()){
-      return next();
-     }
-     res.redirect("/login")
-  }
-
-  function checkCampOwner(req , res , next){
-    if(req.isAuthenticated()){
-      campground.findById(req.params.id, function(err , campground){
-        if(err){
-          res.redirect("back")
-        }
-        else{
-          if(campground.author.id.str == req.user._id){
-             next();
-          }
-          else{
-            res.send("you can't do that lol")
-          }
-        }
-      });
-    }else{
-      res.redirect("back")
-    }
-  }
+  app.listen(3000, function(){
+    console.log("server is live and active")
+  })
