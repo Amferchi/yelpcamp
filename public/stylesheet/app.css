@@ -1,0 +1,28 @@
+
+.conew{
+    align-content: center;
+}
+   .frm{
+    /*margin-left:50%;*/
+    padding-left: 50%
+   };
+
+
+   #he{
+    text-align: center;
+   }
+
+   .nav{
+    margin:auto;
+   }
+
+   .delete-camp{
+    display:inline;
+   }
+
+.comt{
+    margin-left: 660px;
+}
+#comy{
+    margin-left: 660px;
+}
