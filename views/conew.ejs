@@ -1,0 +1,8 @@
+<%- include('partials/header.ejs')%>
+   <h2 style=" text-align: center;" > Add new comment to <strong><%=conew.name%></strong></h2> 
+<form style=" margin-left: 46%;" action="/campgrounds/<%= conew._id%>/comments" method="post" >
+    <div class="conew">
+    <p><textarea name="comment[info]" required></textarea></p>
+ <button class="btn btn-primary">new comment</button>
+</form></div>
+<%- include ('partials/footer.ejs') %>

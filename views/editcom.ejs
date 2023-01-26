@@ -1,0 +1,8 @@
+<%- include('partials/header.ejs')%>
+   <h2 style=" text-align: center;" >Edit your comment on <strong><%=campground.name%></strong></h2> 
+<form style=" margin-left: 46%;" action="/campgrounds/<%=campground._id%>/comments/<%=conew._id%>/edit?_method=PUT" method="post" >
+    <div class="conew">
+    <p></p><textarea name="comment[info]" required><%=conew.info%></textarea></p>
+ <button class="btn btn-primary">edit</button>
+</form></div>
+<%- include ('partials/footer.ejs') %>

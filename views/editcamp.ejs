@@ -1,0 +1,27 @@
+<%- include('partials/header.ejs') %>
+
+<div class="container">
+<div class="row"> 
+  <h1 id="he" style= "margin-right:250px;">edit : <strong><%=campground.name%></strong></h1>
+<form action ="/campgrounds/<%=campground._id%>/edit?_method=PUT" method="post">
+  <div style= "margin-right:250px; padding-top: 30%; width: 350px;  align-items: center;">
+    <div class="form-group"> 
+      <input class="form-control" type="text" value="<%=campground.name%>" name="body[name]" required>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" value="<%=campground.image%>" name="body[image]" required>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" value="<%=campground.description%>" name="body[description]" required>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" value="<%=campground.price%>" name="body[price]" required>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block">add</button>
+    </div>
+</form>
+
+</div>
+</div>
+<%- include('partials/footer.ejs') %>

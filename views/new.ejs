@@ -1,0 +1,26 @@
+ <%- include('partials/header.ejs') %>
+
+<div class="container">
+  <h1 id="he" style= "margin-right:250px;">Create a New Campground</h1>
+<form action ="/campgrounds" method="post">
+  <div style= "margin-right:250px; padding-top: 30%; width: 350px;  align-items: center;">
+    <div class="form-group"> 
+      <input class="form-control" type="text" placeholder="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="image" name="image" required>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="description" name="description" required>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="price" name="price" required>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block">add</button>
+    </div>
+</form>
+
+
+</div>
+<%- include('partials/footer.ejs') %>

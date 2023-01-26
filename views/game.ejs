@@ -1,0 +1,238 @@
+<%- include('partials/header.ejs')%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>game</title>
+</head>
+<body>
+    <h3 id= "ovk"></h3>
+ <h1> The great
+ <br>
+  <span id="colordisplay">rgb</span> 
+  <br>
+guessing game</h1>
+
+ <div id="stripe">
+ 	<button id="button">New colors</button>z
+ 	<span id="message"></span>
+ 	<button id="esybtn">Easy</button>
+ 	<button  id="hrdbtn">Hard</button>	
+ </div>
+ 
+ <div id="container">
+ 	 <div class="square"></div>
+ 	 <div class="square"></div>
+ 	 <div class="square"></div>
+ 	 <div class="square"></div>
+ 	 <div class="square"></div>
+ 	 <div class="square"></div>
+ </div>
+
+ <script>
+     
+      alert("Welcome to the great rgb guessing game by Ferchi😎");
+ var ovk = prompt("pls what is your name");
+ alert("to play mix the colors * RGG(--- (red),--- (green),--- (blue))*  displayed above and click the color that you think is the right one, note that the numbers represents the amount of color contained in the mix");
+ alert("Pls click the new colors button below to proceed and play");
+ var uok =document.querySelector("#ovk");
+ var resetButton = document.querySelector("#button")
+  var colors = generateRandomColors(numSquares);
+  var numSquares = 6;
+ var h1 = document.querySelector("h1")
+ var squares = document.querySelectorAll(".square");
+ var pickedColor = pickColor();
+  var colorDisplay = document.getElementById("colordisplay");
+  var messageDisplay = document.getElementById("message");
+ var easybtn =document.querySelector("#esybtn");
+  var hardbtn =document.querySelector("#hrdbtn");
+   uok.textContent = "PLAYER 💥" + ovk;
+
+  easybtn.addEventListener("click", function(){
+    hardbtn.classList.remove("selected");
+     easybtn.classList.add("selected");
+     alert("click the new colors button to save changes");
+     numSquares= 3;
+     colors = generateRandomColors(numSquares)
+     for (var i = 0; i < squares.length; i++) {
+         if (colors[i]) {
+            squares[i].style.backgroundColor = colors[i];
+         }
+         else{
+            squares[i].style.display = "none";
+         }
+     }
+  
+  }) 
+  hardbtn.addEventListener("click", function(){
+    easybtn.classList.remove("selected");
+   hardbtn.classList.add("selected");
+   alert("click the new colors button to save changes");
+   numSquares=6;
+   colors = generateRandomColors(numSquares)
+     for (var i = 0; i < squares.length; i++) {
+        squares[i].style.display = "block";
+     }
+  })
+
+ resetButton.addEventListener("click",function(){
+    colors = generateRandomColors(numSquares);
+ resetButton.textContent = "New colors"
+    pickedColor = pickColor();
+   messageDisplay.textContent = "New game"
+    colorDisplay.textContent = pickedColor;
+
+ for(var i = 0; i < squares.length; i++){
+  
+    squares[i].style.backgroundColor = colors[i]; }
+  h1.style.backgroundColor ="steelblue"
+ })
+ colorDisplay.textContent= pickedColor;
+
+ for(var i = 0; i < squares.length; i++){
+  
+    squares[i].style.backgroundColor = colors[i];
+
+    squares[i].addEventListener("click", function(){
+
+        var clickedColor = this.style.backgroundColor;
+
+        if (clickedColor ===pickedColor){
+      
+       messageDisplay.textContent = "correct!"
+       changeColors(clickedColor)
+       resetButton.textContent = "Play again?"
+       resetButton.style.backgroundColor = "232323"
+       h1.style.backgroundColor = clickedColor;
+   }
+  else {
+    this.style.background = "#232323";
+     messageDisplay.textContent = "try again";
+        }
+    });
+ }
+
+function changeColors(color){
+
+    for(var i= 0; i < colors.length; i++) {
+        squares[i].style.backgroundColor= color;
+    }
+}
+ function pickColor() {
+   var random = Math.floor(Math.random() * colors.length);
+   return colors[random];
+ }
+ function generateRandomColors(num){
+    var arr = []
+
+    for(var i = 0; i < num; i++){
+     arr.push(randomColor())
+    }
+
+    return arr;
+ }
+
+ function randomColor(){
+    var r = Math.floor(Math.random() * 256);
+    var g= Math.floor(Math.random() * 256);
+    var b= Math.floor(Math.random() * 256);
+    return "rgb(" + r + ", "+ g + ", " + b + ")";
+ }
+ </script>
+
+
+ <style>
+
+    button{
+
+        border: 2px solid red;
+        border-radius: 35%;
+    }
+     
+     body {
+    background-color: #232323;
+    margin: 0;
+    font-family: "Montserrat", "Avenir";
+}
+
+#ovk{
+    color: #fff;
+}
+ 
+ .square {
+    width: 30%;
+    background: purple;
+    padding-bottom: 30%;
+    float: left;
+    margin: 1.66%;
+    border-radius: 30%;
+    transition: background 0.5s;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+ }
+
+ #container {
+    margin: 20px auto;
+    max-width: 30%;
+ }
+
+ h1 {
+    color: white;
+   text-align: center;
+   text-transform: uppercase;
+   background-color: steelblue;
+   line-height: 1.1;
+   font-weight: normal;
+   margin: 0;
+   padding-top: 10px;
+   padding-bottom: 10px;
+ }
+
+ span {
+    color: white;
+ }
+
+ #stripe{
+    background-color: white;
+    height: 30px;
+    text-align: center;
+    color: white;
+
+
+ }
+.selected{
+    color: white;
+    background-color: steelblue;;
+}
+#colordisplay{
+    font-size: 150%;
+}
+button{
+    color: steelblue;
+    border: none;
+    background: none;
+    font-weight: 700px;
+    color: steelblue;
+    height: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: large;
+    transition: all 0.4s;
+     -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+}
+#message{
+    display: inline-block;
+    width: 20%;
+    color: steelblue;
+}
+button:hover{
+    color: white;
+    background-color: steelblue;
+}
+ </style>
+</body>
+</html>
+
+<%- include ('partials/footer.ejs') %>
