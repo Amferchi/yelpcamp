@@ -62,12 +62,12 @@ app.delete("/campgrounds/:id/comments/:comments_id/delete",middleware.checkComOw
   })
 })
 //game
-app.get("/game",isLoggedin, function(req, res){
+app.get("/game",middleware.isLoggedin, function(req, res){
   res.render("game")
 })
 
   //campgrounds
-  app.get("/campgrounds/new",isLoggedin,function(_req ,res) {
+  app.get("/campgrounds/new",middleware.isLoggedin,function(_req ,res) {
  res.render("new.ejs")
   })
 
@@ -75,7 +75,7 @@ app.get("/game",isLoggedin, function(req, res){
         res.render("landing")
   });
 
-  app.get("/campgrounds",isLoggedin ,function(req , res){
+  app.get("/campgrounds",function(req , res){
     campground.find({}, function(err , campgrounds){
       if(err){console.log("Oh no an error occured")
     }
@@ -84,21 +84,21 @@ app.get("/game",isLoggedin, function(req, res){
     
 });
   
-app.get("/campgrounds/:id/comments/new",isLoggedin, function(req, res ){
+app.get("/campgrounds/:id/comments/new",middleware.isLoggedin, function(req, res ){
   campground.findById(req.params.id , function(err , conew){
     if(err){console.log("oh no an error occured")}
     else{res.render("conew" , {conew:conew})}
   })
 })
 
-  app.get("/campgrounds/:id",isLoggedin, function (req ,res){
+  app.get("/campgrounds/:id", function (req ,res){
     campground.findById(req.params.id).populate("comments").exec(function(err , bycamp){
       if(err){console.log("OH NO AN ERROR OCCURED");}
       else{res.render("showpage" , {campground:bycamp})}
     });
   });
 
-  app.post("/campgrounds",isLoggedin, function (req ,res){
+  app.post("/campgrounds",middleware.isLoggedin, function (req ,res){
      var name =req.body.name
      var image = req.body.image
      var description = req.body.description
@@ -115,7 +115,7 @@ app.get("/campgrounds/:id/comments/new",isLoggedin, function(req, res ){
   });
 
 
-app.post("/campgrounds/:id/comments" ,isLoggedin, function(req , res){ 
+app.post("/campgrounds/:id/comments",middleware.isLoggedin, function(req , res){ 
   campground.findById(req.params.id , function(err, campground) {
     if(err){console.log(err)}
     else{
@@ -198,28 +198,3 @@ app.post("/campgrounds/:id/comments" ,isLoggedin, function(req , res){
       res.redirect("back")
     }
   }
-
-  
-  function checkComOwner(req , res , next){
-    if(req.isAuthenticated()){
-      comments.findById(req.params.comments_id, function(err , comment){
-        if(err){
-          res.redirect("back")
-        }
-        else{
-          if(req.user._id.equals(comment.writer.id)){
-            return next();
-          }
- 
-            res.redirect("back")
-        }
-      });
-    }else{
-      res.redirect("back")
-    }
-  }
-
-  app.listen(9000, function(){
-      console.log("server is live and active")
-    
-  });
