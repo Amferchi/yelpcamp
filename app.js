@@ -176,12 +176,12 @@ app.post("/campgrounds/:id/comments",middleware.isLoggedin, function(req , res){
   app.post("/register", function(req,res){
       User.register(new User({username:req.body.username}), req.body.password, function(err, user){
         if(err){
-        console.log(err.message); 
+        req.flash("error", err.message); 
         
         return res.render("register")
         }
         passport.authenticate("local")(req , res , function(){
-        req.flash("success" , "Welcome to yelpcamp" +   user.username)
+        req.flash("success" , "Welcome to yelpcamp"   +  user.username)
            res.redirect("/campgrounds")
         })
       })
