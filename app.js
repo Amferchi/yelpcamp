@@ -12,7 +12,7 @@ var User = require("./models/user.js");
 var override = require("method-override");
 var middleware = require("./middleware/index.js");
 
-mongoose.connect("mongodb://localhost/yelpcamp")
+mongoose.connect("mongodb+srv://Amferchi:wapman@cluster0.5n3ffrc.mongodb.net/?retryWrites=true&w=majority")
 app.use(require("express-session")({
  secret:"I love my mum",
  resave: false,
