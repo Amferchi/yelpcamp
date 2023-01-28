@@ -181,7 +181,7 @@ app.post("/campgrounds/:id/comments",middleware.isLoggedin, function(req , res){
         return res.render("register")
         }
         passport.authenticate("local")(req , res , function(){
-        req.flash("success" , "Welcome to yelpcamp"   +  user.username)
+        req.flash("success" ,"Welcome to yelpcamp" + user.username)
            res.redirect("/campgrounds")
         })
       })
