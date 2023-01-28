@@ -17,7 +17,7 @@
     <img style=" width:100%; " class="img-responsive" src=" <%=campground.image%>">
     <div class="caption-full">
     <h4><a><%=campground.name%></a></h4>
-    <h4 class="comt"><%=campground.price%></h4>
+    <h4 class="comt">$<%=campground.price%>/night</h4>
     <div><%=campground.description%></div>     
                  <em><P>submitted by: <strong><%= campground.author.username%></strong></P></em>
           <%if(currentUser && currentUser._id.toString() === campground.author.id.toString()){%>
