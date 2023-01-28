@@ -7,7 +7,7 @@
 	<title>game</title>
 </head>
 <body>
-    <h3 id= "ovk"></h3>
+    <h3 id= "ovk">Player⚡<%=currentUser.username%></h3>
  <h1> The great
  <br>
   <span id="colordisplay">rgb</span> 
@@ -33,10 +33,10 @@ guessing game</h1>
  <script>
      
       alert("Welcome to the great rgb guessing game by Ferchi😎");
- var ovk = prompt("pls what is your name");
+ //var ovk = prompt("pls what is your name");//
  alert("to play mix the colors * RGG(--- (red),--- (green),--- (blue))*  displayed above and click the color that you think is the right one, note that the numbers represents the amount of color contained in the mix");
  alert("Pls click the new colors button below to proceed and play");
- var uok =document.querySelector("#ovk");
+// var uok =document.querySelector("#ovk");//
  var resetButton = document.querySelector("#button")
   var colors = generateRandomColors(numSquares);
   var numSquares = 6;
@@ -47,7 +47,7 @@ guessing game</h1>
   var messageDisplay = document.getElementById("message");
  var easybtn =document.querySelector("#esybtn");
   var hardbtn =document.querySelector("#hrdbtn");
-   uok.textContent = "PLAYER 💥" + ovk;
+   //uok.textContent = "PLAYER 💥" + ovk;//
 
   easybtn.addEventListener("click", function(){
     hardbtn.classList.remove("selected");
