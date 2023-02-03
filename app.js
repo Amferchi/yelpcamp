@@ -36,6 +36,10 @@ app.use(function(req , res , next){
   next();
 });
 
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&" );
+};
+
 //EDIT ROUTES
  app.get("/campgrounds/:id/edit",middleware.checkCampOwner, function(req , res){
    campground.findById(req.params.id , function(err, campground){
@@ -108,12 +112,21 @@ app.get("/game",middleware.isLoggedin, function(req, res){
   });
 
   app.get("/campgrounds",function(req , res){
-    campground.find({}, function(err , campgrounds){
-      if(err){console.log("Oh no an error occured")
-    }
-    else{res.render("index" , {ground : campgrounds}); }
-    })
+       if(req.query.search){
+    const regex = new RegExp(escapeRegex(req.query.search) , "gi")
+    campground.find({name: regex}, function(err , campground){
+      if(err){console.log("OH no error")}
+      else{
+         res.render("index" , {ground : campground});}
     
+    })}
+ else{campground.find({}, function(err , campgrounds){
+      if(err){console.log("Oh no an error occured")
+      }
+    else{res.render("index" , {ground : campgrounds}); }
+       }) 
+  }
+     
 });
   
 app.get("/campgrounds/:id/comments/new",middleware.isLoggedin, function(req, res ){
@@ -203,6 +216,7 @@ app.post("/campgrounds/:id/comments",middleware.isLoggedin, function(req , res){
   }), function(req,res){
   })
 
+  
   app.listen(3000, function(){
     console.log("server is live and active")
   })
