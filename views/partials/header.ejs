@@ -9,30 +9,50 @@
 	<link rel=" stylesheet" href="/stylesheet/app.css" crossorigin="anonymous">
 </head>
 <body>
-	<nav class="navbar fixed-top navbar-light bg-light">
-		<div class="container-fluid" class="nav">
-		   <div class="navbar-header">
-			<a class="nav navbar-brand" href="/">Yelpcamp</a>
-		   </div>
-		   <div class="collapse.navbar-collaspe">
-			 <ul class="nav navbar-nav navbar-right">
+		   <!---nav edit-->
+		   <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark">
+			<div class="container-fluid">	    
+			 <div class="collapse navbar-collapse " id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto order-0 ">
+			 <li class="nav-item">
+	     <a class="navbar-brand " href="/">YELPCAMP</a>
+				  </li>
 				<% if(!currentUser){%>
-				<li class="nav-item" ><a href="/login">login</a></li>
-				<li class="nav-item"><a href="/register">sign up</a></li>
-				<%} else {%>	
-				<li class="nav-item" ><a href="#"> signed in as-<%=currentUser.username%></a></li>
-				<li class="nav-item"><a href="/logout">logout</a></li>
-				<li class="nav-item"><a href="/game">play game</a></li>
-				<%}%>	
-			 </ul>
-		   </div>
-		   </div>
-		   </nav>
-		   <hr>
-		   <hr>
-		   <hr>
-		   <br>
+				  <li class="nav-item">
+					<a class="nav-link" href="/register">SignUp</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="/login">Login</a>
+				  </li>
+			<%} else {%>
+				<li class="nav-item">
+					<a class="nav-link" href="/campgrounds">Home</a>
+				  </li>
 
+				<li class="nav-item">
+				<a class="nav-link" href="/game" tabindex="-4">gaming</a>
+				  </li>
+
+				  <li class="nav-item">
+					<a class="nav-link" href="/logout">logout</a>
+				  </li>
+				
+		    <%}%> 
+				</ul>
+				<div class="mx-auto">
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">j</span>
+				  </button>
+			  </div>
+				<form action="/campgrounds" method="GET" class="d-flex ms-auto order-5">
+				<input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+				<button class="btn btn-outline-success">Search</button>
+				</form>
+			  </div>
+			</div>
+		  </nav>
+     <P></P>
+<hr><hr><hr>
   <div class="container">
 	<%if(error && error.length > 0 ){%>  
 		 <div class="alert alert-danger"><%=error%></div>
@@ -41,4 +61,5 @@
 			<div class="alert alert-success"><%=success%></div>
 		 <%}%>
 	</div>
+	<p></p>
    
