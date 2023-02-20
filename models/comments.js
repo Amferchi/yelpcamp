@@ -8,7 +8,8 @@ var CommentSchema = new mongoose.Schema({
         },
         username:String
     },
-    info: String
+    info: String,
+    date: {type: Date , default: Date.now}
 })
 
 

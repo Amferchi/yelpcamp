@@ -17,7 +17,9 @@ var groundSchema = new mongoose.Schema({
      comments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "comments"
-     }]
+     }],
+     date: {
+      type: Date , default: Date.now}
 })
 
 module.exports= mongoose.model("campground" , groundSchema)
