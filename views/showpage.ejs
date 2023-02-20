@@ -16,21 +16,26 @@
     <img style=" width:100%; " class="img-responsive" src=" <%=campground.image%>">
     <div class="caption-full">
     <h4><a><%=campground.name%></a></h4>
-    <h4 class="comt">$<%=campground.price%>/night</h4>
+    <h4><a class="btn btn-sm btn-primary comt" href="/campgrounds/<%=campground._id%>/pay">Pay ₦<%=campground.price%>/night</a></h4>
     <div><%=campground.description%></div>     
-                 <em><P>submitted by: <strong><%= campground.author.username%></strong></P></em>
+                 <em><P>submitted by: <strong><%= campground.author.username%></strong> on <%=campground.date.toDateString()%></P></em>
           <%if(currentUser && currentUser._id.toString() === campground.author.id.toString()){%>
                 <a class="btn btn-warning btn-sm " href="/campgrounds/<%=campground._id%>/edit">edit</a>    
                  <form class="delete-camp" action="/campgrounds/<%=campground._id%>/delete?_method=DELETE" method="post">
                  <button class="btn btn-danger btn-sm">Delete</button>
             <%}%>
                </form>
-      <div class="well">
-        <hr>
+               <hr>
+      <div class="well well-large">
   <a class="btn btn-success btn-sm" id ="comy" href="/campgrounds/<%= campground._id%>/comments/new">add new comment</a>
-<div>
+       <div>
     <%campground.comments.forEach(function(comments){%>
-  <div><strong><%=comments.writer.username%></strong>: <%=comments.info%> 
+  <div class="comment">
+<strong id="comm"><%=comments.writer.username%></strong>: 
+       <p> <em class="d-flex flex-row-reverse">
+   <span class="p-2"><%=comments.date.toDateString()%></span>
+    </em>
+    <h6> <%=comments.info%></h6>  </p>
     <%if(currentUser && currentUser._id.toString() === comments.writer.id.toString()){%>
         <a class="btn btn-sm btn-warning" href="/campgrounds/<%=campground._id%>/comments/<%=comments._id%>/edit">edit</a>
    <form class="delete-camp" action="/campgrounds/<%=campground._id%>/comments/<%=comments._id%>/delete?_method=DELETE" method="post">
@@ -41,13 +46,13 @@
   </div>
     <% })%>
 </div>
+
 </div>
-            </div>
-         </div>
-       </div>
     </div>
+   </div>
+   </div>
   </div>
-</div>
+ </div>
 
 
 
