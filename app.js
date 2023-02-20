@@ -36,6 +36,15 @@ app.use(function(req , res , next){
   next();
 });
 
+app.get("/campgrounds/:id/pay",middleware.isLoggedin, function(req, res){
+  campground.findById(req.params.id, function(err, camp){
+    if(err){
+      req.flash("error" , "We could not process your payment")
+    }
+    else{ res.render("pay", {campground:camp})}
+  })
+})
+
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&" );
 };
@@ -217,6 +226,6 @@ app.post("/campgrounds/:id/comments",middleware.isLoggedin, function(req , res){
   })
 
   
-  app.listen(3000, function(){
+  app.listen(7000, function(){
     console.log("server is live and active")
   })
